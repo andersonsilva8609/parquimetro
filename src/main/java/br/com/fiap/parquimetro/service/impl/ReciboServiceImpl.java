@@ -1,7 +1,7 @@
 package br.com.fiap.parquimetro.service.impl;
 
 import br.com.fiap.parquimetro.dto.ReciboDTO;
-import br.com.fiap.parquimetro.model.*;
+import br.com.fiap.parquimetro.model.Recibo;
 import br.com.fiap.parquimetro.repository.ReciboRepository;
 import br.com.fiap.parquimetro.service.ReciboService;
 import jakarta.persistence.EntityNotFoundException;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -34,18 +33,10 @@ public class ReciboServiceImpl implements ReciboService {
     }
 
     public Recibo salva(Recibo recibo){
+
         return repo.save(recibo);
     }
 
-    public Recibo toEntity(ReciboDTO dto) {
-        Recibo recibo = new Recibo(
-                dto.id(),
-                dto.valorHora(),
-                dto.valorTotal(),
-                dto.tempoPermanencia(),
-                new Permanencia(UUID, new Cliente()));
-        return recibo;
-    }
 
     public ReciboDTO toDTO(Recibo recibo){
         return new ReciboDTO(

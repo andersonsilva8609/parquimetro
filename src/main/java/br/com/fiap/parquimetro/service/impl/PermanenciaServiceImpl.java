@@ -63,7 +63,11 @@ public class PermanenciaServiceImpl implements PermanenciaService {
         if (permanencia.getTempoFixo()) {
             permanencia.setSaida(permanencia.getEntrada().plusHours(permanencia.getHorasTempoFixo()));
             permanencia.setPagamentoStatus(PagamentoStatus.PAGO);
-            geraRecibo(permanencia, true);
+            try {
+                geraRecibo(permanencia, true);
+            } catch (BusinessException e) {
+                throw new RuntimeException(e);
+            }
             permanencia = permanenciaRepository.save(permanencia);
         }
         return toDTO(permanencia);
@@ -118,7 +122,7 @@ public class PermanenciaServiceImpl implements PermanenciaService {
         update(toDTO(permanencia));
     }
 
-    private void geraRecibo(Permanencia permanencia, boolean horaFixa) {
+    private void geraRecibo(Permanencia permanencia, boolean horaFixa) throws BusinessException {
         Recibo recibo = null;
         LocalVagaDTO localVagaDTO = localVagaService.buscarLocalVaga(permanencia.getLocal().getId());
         permanencia.getLocal().setValorHoraFixa(localVagaDTO.valorHoraFixa());
@@ -225,7 +229,7 @@ public class PermanenciaServiceImpl implements PermanenciaService {
     public Permanencia toEntity(PermanenciaDTO dto) {
         return new Permanencia(
                 dto.id(),
-                new Cliente(clienteDTO.id(), clienteDTO.nome(), clienteDTO.dataNascimento(), clienteDTO.email(), clienteDTO.telefone(), dto.idCliente(), clienteDTO.endereco(), clienteDTO.formaPagamentoPreferida()),
+                new Cliente(dto.idCliente()),
                 new Veiculo(dto.idVeiculo()),
                 new LocalVaga(dto.idLocalVaga()),
                 dto.entrada(),

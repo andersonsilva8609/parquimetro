@@ -1,6 +1,7 @@
 package br.com.fiap.parquimetro.controller;
 
 import br.com.fiap.parquimetro.dto.LocalVagaDTO;
+import br.com.fiap.parquimetro.service.impl.BusinessException;
 import br.com.fiap.parquimetro.service.impl.LocalVagaServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,12 @@ public class LocalVagaController {
     private final LocalVagaServiceImpl localVagaService;
     @GetMapping("/{id}")
     public ResponseEntity<LocalVagaDTO> buscarLocalVaga(@PathVariable String id) {
-        LocalVagaDTO resultado = localVagaService.buscarLocalVaga(id);
+        LocalVagaDTO resultado = null;
+        try {
+            resultado = localVagaService.buscarLocalVaga(id);
+        } catch (BusinessException e) {
+            throw new RuntimeException(e);
+        }
         return new ResponseEntity<>(resultado, HttpStatus.OK);
     }
 

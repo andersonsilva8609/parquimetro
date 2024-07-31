@@ -3,6 +3,7 @@ package br.com.fiap.parquimetro.service.impl;
 import br.com.fiap.parquimetro.dto.LocalVagaDTO;
 import br.com.fiap.parquimetro.model.LocalVaga;
 import br.com.fiap.parquimetro.model.Permanencia;
+import br.com.fiap.parquimetro.model.enums.Status;
 import br.com.fiap.parquimetro.repository.LocalVagaRepository;
 import br.com.fiap.parquimetro.service.LocalVagaService;
 import lombok.RequiredArgsConstructor;
@@ -118,19 +119,17 @@ public class LocalVagaServiceImpl implements LocalVagaService {
     }
 
     public LocalVagaDTO toDTO(LocalVaga localVaga) {
-        return new LocalVagaDTO(
-                localVaga.getId(),
+        return new LocalVagaDTO(localVaga.getId(),
                 localVaga.getValorHoraVariavel(),
                 localVaga.getValorHoraFixa(),
-                localVaga.getStatus(),
+                (Status) localVaga.getStatus(),
                 localVaga.getRua(),
                 localVaga.getNumero(),
                 localVaga.getBairro(),
                 localVaga.getCidade(),
                 localVaga.getEstado(),
                 localVaga.getPais(),
-                localVaga.getCep()
-        );
+                localVaga.getCep());
     }
 
     private LocalVaga toEntity(LocalVagaDTO localVagaDTO) {

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Getter
@@ -65,9 +66,13 @@ public class VeiculoServiceImpl implements VeiculoService {
                 TipoVeiculo.fromValue(dto.tipo()),
                 dto.cor(),
                 dto.status() != null ? Status.fromValue(dto.status()) : null,
-                new Cliente(dto.idCliente());
+                new Cliente(idCliente())
         );
         return veiculo;
+    }
+
+    private UUID idCliente() {
+        return null;
     }
 
     public VeiculoDTO toDTO(Veiculo veiculo){

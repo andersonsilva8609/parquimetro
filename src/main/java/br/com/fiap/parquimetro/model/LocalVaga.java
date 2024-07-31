@@ -1,6 +1,6 @@
 package br.com.fiap.parquimetro.model;
 
-import ch.qos.logback.core.status.Status;
+import br.com.fiap.parquimetro.model.enums.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
