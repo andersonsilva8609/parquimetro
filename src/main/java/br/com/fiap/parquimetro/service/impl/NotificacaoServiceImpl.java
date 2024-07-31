@@ -1,12 +1,12 @@
 package br.com.fiap.parquimetro.service.impl;
 
 import br.com.fiap.parquimetro.dto.NotificacaoDTO;
-import br.com.fiap.parquimetro.model.Cliente;
 import br.com.fiap.parquimetro.model.Notificacao;
 import br.com.fiap.parquimetro.model.enums.NotificaoStatus;
 import br.com.fiap.parquimetro.repository.NotificacaoRepository;
 import br.com.fiap.parquimetro.service.NotificacaoService;
 import jakarta.persistence.EntityNotFoundException;
+import jdk.jshell.Snippet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +19,18 @@ public class NotificacaoServiceImpl implements NotificacaoService {
 
     @Autowired
     private NotificacaoRepository notificacaoRepository;
+    private Snippet clienteDTO;
+
+    public NotificacaoServiceImpl(NotificacaoRepository notificacaoRepository) {
+        this.notificacaoRepository = notificacaoRepository;
+    }
+
+    private void toEntity(NotificacaoDTO dto) {
+    }
 
     @Override
     public NotificacaoDTO criar(NotificacaoDTO dto) {
-        var notificacao = toEntity(dto);
-
-        return toDTO(notificacaoRepository.save(notificacao));
+        return null;
     }
 
     @Override
@@ -65,13 +71,4 @@ public class NotificacaoServiceImpl implements NotificacaoService {
         );
     }
 
-    public Notificacao toEntity(NotificacaoDTO dto) {
-        return new Notificacao(
-                dto.id(),
-                dto.mensagem(),
-                new Cliente(clienteDTO.id(), clienteDTO.nome(), clienteDTO.dataNascimento(), clienteDTO.email(), clienteDTO.telefone(), dto.idCliente(), clienteDTO.endereco(), clienteDTO.formaPagamentoPreferida()),
-                dto.dateTime(),
-                dto.status() != null ?  NotificaoStatus.fromValue(dto.status()) : null
-        );
-    }
 }

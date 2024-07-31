@@ -3,7 +3,6 @@ package br.com.fiap.parquimetro.dto;
 import br.com.fiap.parquimetro.model.Endereco;
 import br.com.fiap.parquimetro.model.enums.TipoFormaPagamento;
 import jakarta.validation.constraints.NotNull;
-
 import java.time.LocalDate;
 
 public record ClienteDTO(

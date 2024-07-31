@@ -8,6 +8,6 @@ public record VeiculoDTO(
         Integer tipo,
         String cor,
         Integer status,
-        String idCliente
+        java.util.UUID idCliente
 ) {
 }

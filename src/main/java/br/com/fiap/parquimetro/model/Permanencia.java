@@ -45,7 +45,8 @@ public class Permanencia {
 
     private Integer horasTempoFixo;
 
-    public Permanencia(UUID id, Cliente cliente, Veiculo veiculo, LocalVaga local, Object entrada, Object saida, Object tipoPagamento, Object pagamentoStatus, Object permanenciaStatus, Object tempoFixo, Object horasTempoFixo){
+    public Permanencia(UUID id, Cliente cliente, Veiculo veiculo, LocalVaga local, Object entrada, Object saida, Object tipoPagamento,
+                       Object pagamentoStatus, Object permanenciaStatus, Object tempoFixo, Object horasTempoFixo){
 
     }
 
@@ -59,6 +60,7 @@ public class Permanencia {
     }
 
     public boolean getTempoFixo() {
+    return Boolean.parseBoolean(null);
     }
 
     public LocalDateTime getEntrada() {
@@ -69,10 +71,12 @@ public class Permanencia {
     }
 
     public long getHorasTempoFixo() {
+
         return 0;
     }
 
     public Cliente getCliente() {
+
         return null;
     }
 }

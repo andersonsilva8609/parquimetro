@@ -3,7 +3,9 @@ package br.com.fiap.parquimetro.model;
 import br.com.fiap.parquimetro.model.enums.Status;
 import br.com.fiap.parquimetro.model.enums.TipoFormaPagamento;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -11,6 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "TB_CLIENTE")
 public class Cliente {
     private static final long serialVersionUID = 1L;
@@ -39,6 +42,12 @@ public class Cliente {
     private Endereco endereco;
 
     private TipoFormaPagamento opcaoPagamentoPreferida;
+
+    public Cliente(UUID idCliente) {
+    }
+
+    public Cliente(UUID idCliente, @NotNull String nome, LocalDate localDate, String email, String telefone, boolean b, Endereco endereco, TipoFormaPagamento tipoFormaPagamento) {
+    }
 
     public Endereco getEndereco() {
         return endereco;

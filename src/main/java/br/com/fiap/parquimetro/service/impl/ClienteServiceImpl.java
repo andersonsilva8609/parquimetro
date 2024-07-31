@@ -2,7 +2,6 @@ package br.com.fiap.parquimetro.service.impl;
 
 import br.com.fiap.parquimetro.dto.ClienteDTO;
 import br.com.fiap.parquimetro.model.Cliente;
-import br.com.fiap.parquimetro.model.enums.Status;
 import br.com.fiap.parquimetro.repository.ClienteRepository;
 import br.com.fiap.parquimetro.repository.EnderecoRepository;
 import br.com.fiap.parquimetro.service.ClienteService;
@@ -47,7 +46,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void update(ClienteDTO clienteDTO) {
-        this.get(ClienteDTO.id());
+         this.get(UUID.fromString(String.valueOf(clienteDTO.id())));
         var clienteEndereco = clienteDTO.endereco();
 
         enderecoRepository.save(clienteEndereco);
@@ -66,7 +65,7 @@ public class ClienteServiceImpl implements ClienteService {
                 clienteDTO.dataNascimento(),
                 clienteDTO.email(),
                 clienteDTO.telefone(),
-                clienteDTO.status() != null ?  Status.fromValue(clienteDTO.status()) : null,
+                clienteDTO.status() != null,
                 clienteDTO.endereco(),
                 clienteDTO.formaPagamentoPreferida()
         );

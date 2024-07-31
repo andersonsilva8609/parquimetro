@@ -1,7 +1,12 @@
 package br.com.fiap.parquimetro.model;
 
+import br.com.fiap.parquimetro.model.enums.Status;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Embeddable
 @Table
@@ -30,4 +35,12 @@ public class Endereco {
 
     @Column(nullable = false)
     private String cep;
+
+    public void setStatus(Status status) {
+    }
+
+    public Status getStatus() {
+        Status status = null;
+        return status;
+    }
 }

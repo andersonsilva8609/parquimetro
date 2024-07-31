@@ -5,13 +5,15 @@ import br.com.fiap.parquimetro.model.*;
 import br.com.fiap.parquimetro.repository.ReciboRepository;
 import br.com.fiap.parquimetro.service.ReciboService;
 import jakarta.persistence.EntityNotFoundException;
+import jdk.jshell.Snippet;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.UUID;
+
 @Getter
 @Setter
 @Service
@@ -19,6 +21,7 @@ public class ReciboServiceImpl implements ReciboService {
 
     @Autowired
     private ReciboRepository repo;
+    private Snippet clienteDTO;
 
     @Override
     public ReciboDTO get(String id) {
@@ -27,7 +30,7 @@ public class ReciboServiceImpl implements ReciboService {
 
     @Override
     public List<ReciboDTO> getByClienteId(String id) {
-        return repo.findByClienteId(id).stream().map(this::toDTO).collect(Collectors.toList());
+        return (List<ReciboDTO>) repo.findByClienteId(id);
     }
 
     public Recibo salva(Recibo recibo){
@@ -35,14 +38,13 @@ public class ReciboServiceImpl implements ReciboService {
     }
 
     public Recibo toEntity(ReciboDTO dto) {
-        return new Recibo(
+        Recibo recibo = new Recibo(
                 dto.id(),
                 dto.valorHora(),
                 dto.valorTotal(),
                 dto.tempoPermanencia(),
-                new Permanencia(dto.idPermanencia(), new Cliente(clienteDTO.id(), clienteDTO.nome(), clienteDTO.dataNascimento(), clienteDTO.email(), clienteDTO.telefone(), dto.idCliente(), clienteDTO.endereco(), clienteDTO.formaPagamentoPreferida()), new Veiculo(dto.idVeiculo()), new LocalVaga(dto.idLocalVaga()), dto.entrada(), dto.saida(), dto.tipoPagamento(), dto.pagamentoStatus(), dto.permanenciaStatus(), dto.tempoFixo(), dto.horasTempoFixo()),
-                new Cliente(clienteDTO.id(), clienteDTO.nome(), clienteDTO.dataNascimento(), clienteDTO.email(), clienteDTO.telefone(), dto.idCliente(), clienteDTO.endereco(), clienteDTO.formaPagamentoPreferida())
-        );
+                new Permanencia(UUID, new Cliente()));
+        return recibo;
     }
 
     public ReciboDTO toDTO(Recibo recibo){

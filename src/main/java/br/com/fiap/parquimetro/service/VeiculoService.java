@@ -11,5 +11,7 @@ public interface VeiculoService {
 
     public List<VeiculoDTO> getByClienteId(String id);
 
+    List<VeiculoDTO> getByClenteId(String id);
+
     public void update(VeiculoDTO dto);
 }

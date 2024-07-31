@@ -56,14 +56,18 @@ public class Recibo {
     }
 
     public String getId() {
+        return null;
     }
 
     public BigDecimal getValorHora() {
+        return null;
     }
 
     public BigDecimal getValorTotal() {
+        return null;
     }
 
     public Duration getTempoPermanencia() {
+        return null;
     }
 }

@@ -5,14 +5,19 @@ import br.com.fiap.parquimetro.model.Cliente;
 import br.com.fiap.parquimetro.model.Veiculo;
 import br.com.fiap.parquimetro.model.enums.Status;
 import br.com.fiap.parquimetro.model.enums.TipoVeiculo;
+import br.com.fiap.parquimetro.repository.VeiculoRepository;
 import br.com.fiap.parquimetro.service.VeiculoService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
 @Service
 public class VeiculoServiceImpl implements VeiculoService {
 
@@ -34,6 +39,11 @@ public class VeiculoServiceImpl implements VeiculoService {
     }
 
     @Override
+    public List<VeiculoDTO> getByClienteId(String id) {
+        return null;
+    }
+
+    @Override
     public List<VeiculoDTO> getByClenteId(String id) {
         return repo.findByClienteId(id).stream().map(this::toDTO).collect(Collectors.toList());
     }
@@ -46,16 +56,18 @@ public class VeiculoServiceImpl implements VeiculoService {
     }
 
     public Veiculo toEntity(VeiculoDTO dto){
-        return new Veiculo(
+        Veiculo veiculo;
+        veiculo = new Veiculo(
                 dto.id(),
                 dto.placa(),
                 dto.marca(),
                 dto.modelo(),
                 TipoVeiculo.fromValue(dto.tipo()),
                 dto.cor(),
-                dto.status() != null ?  Status.fromValue(dto.status()) : null,
-                new Cliente(clienteDTO.id(), clienteDTO.nome(), clienteDTO.dataNascimento(), clienteDTO.email(), clienteDTO.telefone(), dto.idCliente(), clienteDTO.endereco(), clienteDTO.formaPagamentoPreferida())
+                dto.status() != null ? Status.fromValue(dto.status()) : null,
+                new Cliente(dto.idCliente());
         );
+        return veiculo;
     }
 
     public VeiculoDTO toDTO(Veiculo veiculo){

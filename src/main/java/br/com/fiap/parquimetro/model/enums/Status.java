@@ -2,8 +2,6 @@ package br.com.fiap.parquimetro.model.enums;
 
 import lombok.Getter;
 
-import java.util.UUID;
-
 @Getter
 public enum Status {
     INATIVO(0), ATIVO(1);
@@ -14,7 +12,7 @@ public enum Status {
         this.value = value;
     }
 
-    public static UUID fromValue(int value){
+    public static Status fromValue(int value){
         for (Status status : Status.values()) {
             if (status.getValue() == value) {
                 return status;

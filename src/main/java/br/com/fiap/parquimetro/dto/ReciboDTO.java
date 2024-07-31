@@ -12,29 +12,38 @@ public record ReciboDTO(
         java.util.UUID idCliente
 ) {
     public Object permanenciaStatus() {
+        return null;
     }
 
     public Object pagamentoStatus() {
+        return null;
     }
 
     public Object tipoPagamento() {
+        return null;
     }
 
     public Object saida() {
+        return null;
     }
 
     public Object entrada() {
+        return null;
     }
 
     public String idLocalVaga() {
+        return null;
     }
 
     public String idVeiculo() {
+        return null;
     }
 
     public Object tempoFixo() {
+        return null;
     }
 
     public Object horasTempoFixo() {
+        return null;
     }
 }

@@ -6,7 +6,7 @@ public record NotificacaoDTO(
 
         String id,
         String mensagem,
-        String idCliente,
+        java.util.UUID idCliente,
         LocalDateTime dateTime,
         Integer status
 ) {
